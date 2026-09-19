@@ -12,7 +12,7 @@ class Aluno(models.Model):
         return self.nome
 
 class Atividade(models.Model):
-    nome = models.CharField(max_length=100)
+    nome = models.CharField(max_length=100, unique=True)
     alunos = models.ManyToManyField(Aluno, blank=True, related_name="atividades")
 
     class Meta:
