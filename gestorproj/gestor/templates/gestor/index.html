@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Home</title>
+</head>
+
+<body>
+    <h1><a href="{% url 'gestor:alunos' %}">Alunos</a></h1>
+    <ul>
+        <li>{{ total_alunos }}</li>
+    </ul>
+    <h1><a href="{% url 'gestor:atividades' %}">Atividades</a></h1>
+    <ul>
+        <li>{{ total_atividades }}</li>
+    </ul>
+</body>
+
+</html>

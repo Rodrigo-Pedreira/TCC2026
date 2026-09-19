@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Aluno {{ aluno.nome }}</title>
+</head>
+
+<body>
+  <h1>Aluno</h1>
+  <ul>
+    <li>
+      {{ aluno.ra }} - {{ aluno.nome }} -
+      {% for atividade in aluno_atividades %}
+      <a href="{% url 'gestor:atividade' atividade %}">{{ atividade }}</a>
+      {% endfor %}
+    </li>
+  </ul>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Atividades</title>
+</head>
+
+<body>
+  <h1>Atividades</h1>
+  {% if atividades %}
+  <ul>
+    {% for atividade in atividades %}
+    <li>
+      <a href="{% url 'gestor:atividade' atividade.nome %}">{{ atividade.nome }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>Não há atividades cadastradas.</p>
+  {% endif %}
+</body>
+
+</html>
