@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Aluno, Atividade
 
-# TODO: Numero de total de alunos e atividades
 
 def index(request):
     total_alunos = Aluno.objects.count()

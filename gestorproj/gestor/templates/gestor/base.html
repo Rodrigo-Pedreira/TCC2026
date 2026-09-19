@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+  <div id="sidebar">
+    {% block sidebar %}
+    <ul>
+      <li><a href="{% url 'gestor:index' %}">Home</a></li>
+      <li><a href="{% url 'gestor:alunos' %}">Alunos</a></li>
+      <li><a href="{% url 'gestor:atividades' %}">Atividades</a></li>
+    </ul>
+    {% endblock %}
+  </div>
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+
+</html>

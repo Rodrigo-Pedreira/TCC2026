@@ -1,24 +1,18 @@
-<!doctype html>
-<html lang="pt-BR">
+{% extends "gestor/base.html" %}
 
-<head>
-  <meta charset="utf-8" />
-  <title>Atividades</title>
-</head>
+{% block title %}Atividades{% endblock %}
 
-<body>
-  <h1>Atividades</h1>
-  {% if atividades %}
-  <ul>
-    {% for atividade in atividades %}
-    <li>
-      <a href="{% url 'gestor:atividade' atividade.nome %}">{{ atividade.nome }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-  {% else %}
-  <p>Não há atividades cadastradas.</p>
-  {% endif %}
-</body>
-
-</html>
+{% block content %}
+<h1>Atividades</h1>
+{% if atividades %}
+<ul>
+  {% for atividade in atividades %}
+  <li>
+    <a href="{% url 'gestor:atividade' atividade.nome %}">{{ atividade.nome }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Não há atividades cadastradas.</p>
+{% endif %}
+{% endblock %}

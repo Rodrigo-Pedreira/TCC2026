@@ -1,25 +1,19 @@
-<!doctype html>
-<html lang="pt-BR">
+{% extends "gestor/base.html" %}
 
-<head>
-  <meta charset="utf-8" />
-  <title>Atividade {{ atividade.nome }}</title>
-</head>
+{% block title %}Atividade {{ atividade.nome }}{% endblock %}
 
-<body>
-  <h1>Atividade</h1>
-  <ul>
-    <li>
-      {{ atividade.nome }} -<br />
-      <ul>
-        {% for aluno in alunos %}
-        <li>
-          <a href="{% url 'gestor:aluno' aluno.ra %}">{{ aluno.ra }} - {{ aluno.nome }}</a>
-        </li>
-        {% endfor %}
-      </ul>
-    </li>
-  </ul>
-</body>
-
-</html>
+{% block content %}
+<h1>Atividade</h1>
+<ul>
+  <li>
+    {{ atividade.nome }} -<br />
+    <ul>
+      {% for aluno in alunos %}
+      <li>
+        <a href="{% url 'gestor:aluno' aluno.ra %}">{{ aluno.ra }} - {{ aluno.nome }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>
+{% endblock %}

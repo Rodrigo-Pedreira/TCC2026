@@ -1,22 +1,16 @@
-<!doctype html>
-<html lang="pt-BR">
+{% extends "gestor/base.html" %}
 
-<head>
-  <meta charset="utf-8" />
-  <title>Alunos</title>
-</head>
+{% block title %}Alunos{% endblock %}
 
-<body>
-  <h1>Alunos</h1>
-  {% if alunos %}
-  <ul>
-    {% for aluno in alunos %}
-    <li><a href="{% url 'gestor:aluno' aluno.ra %}">{{ aluno.nome }}</a></li>
-    {% endfor %}
-  </ul>
-  {% else %}
-  <p>Não há alunos cadastrados.</p>
-  {% endif %}
-</body>
-
-</html>
+{% block content %}
+<h1>Alunos</h1>
+{% if alunos %}
+<ul>
+  {% for aluno in alunos %}
+  <li><a href="{% url 'gestor:aluno' aluno.ra %}">{{ aluno.nome }}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Não há alunos cadastrados.</p>
+{% endif %}
+{% endblock %}
