@@ -1,15 +1,17 @@
 {% extends "gestor/base.html" %}
 
-{% block title %}Aluno {{ aluno.nome }}{% endblock %}
+{% block title %} {{ aluno.nome }} {% endblock %}
 
 {% block content %}
 <h1>Aluno</h1>
-<ul>
-  <li>
-    {{ aluno.ra }} - {{ aluno.nome }} -
-    {% for atividade in aluno_atividades %}
+
+<ul class="list-group list-group-horizontal">
+  <li class="list-group-item">{{ aluno.ra }}</li>
+  <li class="list-group-item">{{ aluno.nome }}</li>
+  {% for atividade in aluno_atividades %}
+  <li class="list-group-item">
     <a href="{% url 'gestor:atividade' atividade %}">{{ atividade }}</a>
-    {% endfor %}
   </li>
+  {% endfor %}
 </ul>
 {% endblock %}

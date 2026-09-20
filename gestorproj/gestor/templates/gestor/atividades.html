@@ -3,16 +3,27 @@
 {% block title %}Atividades{% endblock %}
 
 {% block content %}
-<h1>Atividades</h1>
-{% if atividades %}
-<ul>
-  {% for atividade in atividades %}
-  <li>
-    <a href="{% url 'gestor:atividade' atividade.nome %}">{{ atividade.nome }}</a>
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>Não há atividades cadastradas.</p>
-{% endif %}
+<h1>Atividades | {{ total_atividades }}</h1>
+
+<table class="table table-hover w-auto">
+  <thead>
+    <tr>
+      <th>Atividade</th>
+      <th>Participantes</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for atividade in atividades %}
+    <tr>
+      <td class="position-relative"><a class="stretched-link" href="{% url 'gestor:atividade' atividade.nome %}">{{ atividade.nome }}</a></td>
+      <td class="position-relative"><span class="badge text-bg-primary rounded-pill">{{ atividade.alunos.count }}</span></td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="2">Nenhuma atividade encontrada.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

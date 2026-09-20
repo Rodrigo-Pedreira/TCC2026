@@ -1,19 +1,28 @@
 {% extends "gestor/base.html" %}
 
-{% block title %}Atividade {{ atividade.nome }}{% endblock %}
+{% block title %} {{ atividade.nome }} {% endblock %}
 
 {% block content %}
-<h1>Atividade</h1>
-<ul>
-  <li>
-    {{ atividade.nome }} -<br />
-    <ul>
-      {% for aluno in alunos %}
-      <li>
-        <a href="{% url 'gestor:aluno' aluno.ra %}">{{ aluno.ra }} - {{ aluno.nome }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </li>
-</ul>
+<h1>{{ atividade.nome }} | {{ atividade.alunos.count }}</h1>
+
+<table class="table table-hover w-auto">
+  <thead>
+    <tr>
+      <th>RA</th>
+      <th>Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for aluno in alunos %}
+    <tr>
+      <td class="position-relative"><a class="stretched-link" href="{% url 'gestor:aluno' aluno.ra %}">{{ aluno.ra }}</a></td>
+      <td class="position-relative">{{ aluno.nome }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="2">Nenhum aluno encontrado.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
