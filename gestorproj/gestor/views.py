@@ -12,15 +12,17 @@ def index(request):
 
 def alunos(request):
     alunos = Aluno.objects.all()
-    context = {"alunos": alunos}
+    total_alunos = Aluno.objects.count()
+    context = {"alunos": alunos, "total_alunos": total_alunos}
     return render(request, "gestor/alunos.html", context)
 
 
 def aluno(request, aluno_ra):
     aluno = get_object_or_404(Aluno, ra=aluno_ra)
     aluno_atividades = [
-        at.nome for at in aluno.atividades.all()
-    ]  # pyright: ignore[reportAttributeAccessIssue]
+        atv.nome
+        for atv in aluno.atividades.all()  # pyright: ignore[reportAttributeAccessIssue]
+    ]
     context = {"aluno": aluno, "aluno_atividades": aluno_atividades}
     return render(request, "gestor/aluno.html", context)
 
@@ -34,5 +36,6 @@ def atividade(request, atividade_nome):
 
 def atividades(request):
     atividades = Atividade.objects.all()
-    context = {"atividades": atividades}
+    total_atividades = Atividade.objects.count()
+    context = {"atividades": atividades, "total_atividades": total_atividades}
     return render(request, "gestor/atividades.html", context)
