@@ -1,0 +1,27 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<p>Alunos selecionados ({{ queryset.count }}):</p>
+<ul>
+  {% for aluno in queryset %}
+    <li>{{ aluno.ra }} | {{ aluno.nome }}</li>
+  {% endfor %}
+</ul>
+
+<form method="post">
+  {% csrf_token %}
+
+  {# Re-send the selected objects and the action name #}
+  {% for aluno in queryset %}
+    <input type="hidden" name="{{ action_checkbox_name }}" value="{{ aluno.pk }}">
+  {% endfor %}
+  <input type="hidden" name="action" value="{{ action_name }}">
+  <input type="hidden" name="apply" value="1">
+
+  {{ form.as_p }}
+
+  <input type="submit" class="default" value="Adicionar">
+  <a href="{% url 'admin:'|add:opts.app_label|add:'_'|add:opts.model_name|add:'_changelist' %}"
+    class="button cancel-link">Cancelar</a>
+</form>
+{% endblock %}
