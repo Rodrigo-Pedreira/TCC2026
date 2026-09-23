@@ -1,5 +1,5 @@
 from django.urls import path
-
+from django.contrib.auth import views as auth_views
 from . import views
 
 app_name = "gestor"
@@ -9,4 +9,6 @@ urlpatterns = [
     path("atividades/", views.atividades, name="atividades"),
     path("aluno/<str:aluno_ra>/", views.aluno, name="aluno"),
     path("atividade/<str:atividade_nome>/", views.atividade, name="atividade"),
+    path("relatorio_aluno/", views.RelatorioAluno.as_view(), name="relatorio_aluno"),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
