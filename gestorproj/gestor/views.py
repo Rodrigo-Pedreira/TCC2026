@@ -1,8 +1,17 @@
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
+from django.views.generic import TemplateView
+from django_weasyprint import WeasyTemplateView
 
 from .models import Aluno, Atividade
 
 
+# ----------------------------------- Index ---------------------------------- #
+@login_required
+@permission_required(["gestor.view_aluno", "gestor.view_atividade"])
 def index(request):
     total_alunos = Aluno.objects.count()
     total_atividades = Atividade.objects.count()
@@ -10,6 +19,9 @@ def index(request):
     return render(request, "gestor/index.html", context)
 
 
+# ---------------------------------- Alunos ---------------------------------- #
+@login_required
+@permission_required("gestor.view_aluno")
 def alunos(request):
     alunos = Aluno.objects.all()
     total_alunos = Aluno.objects.count()
@@ -17,6 +29,9 @@ def alunos(request):
     return render(request, "gestor/alunos.html", context)
 
 
+# ----------------------------------- Aluno ---------------------------------- #
+@login_required
+@permission_required("gestor.view_aluno")
 def aluno(request, aluno_ra):
     aluno = get_object_or_404(Aluno, ra=aluno_ra)
     aluno_atividades = [
@@ -27,6 +42,9 @@ def aluno(request, aluno_ra):
     return render(request, "gestor/aluno.html", context)
 
 
+# --------------------------------- Atividade -------------------------------- #
+@login_required
+@permission_required("gestor.view_atividade")
 def atividade(request, atividade_nome):
     atividade = get_object_or_404(Atividade, nome=atividade_nome)
     alunos = atividade.alunos.all()
@@ -34,6 +52,9 @@ def atividade(request, atividade_nome):
     return render(request, "gestor/atividade.html", context)
 
 
+# -------------------------------- Atividades -------------------------------- #
+@login_required
+@permission_required("gestor.view_atividade")
 def atividades(request):
     atividades = Atividade.objects.all()
     total_atividades = Atividade.objects.count()

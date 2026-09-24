@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from gestor.views import index as gestor_index
+
 
 urlpatterns = [
+    path("", gestor_index),
     path("gestor/", include("gestor.urls")),
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),

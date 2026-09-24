@@ -145,3 +145,7 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# My Settings / Meus Ajustes
+
+LOGIN_REDIRECT_URL = '/gestor/'
