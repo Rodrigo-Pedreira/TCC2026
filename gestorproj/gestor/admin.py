@@ -14,7 +14,7 @@ admin.site.index_title = (
     "Bem-vindo ao Gestor de Atividades"  # heading on the admin index page
 )
 
-
+# ----------------------------------- Aluno ---------------------------------- #
 @admin.register(Aluno)
 class AlunoAdmin(admin.ModelAdmin):
     list_display = ["ra", "nome"]
@@ -78,7 +78,7 @@ class AlunoAdmin(admin.ModelAdmin):
         }
         return TemplateResponse(request, "admin/adicionar_atividade.html", context)
 
-
+# --------------------------------- Atividade -------------------------------- #
 @admin.register(Atividade)
 class AtividadeAdmin(admin.ModelAdmin):
     list_display = ["nome"]
