@@ -60,3 +60,38 @@ def atividades(request):
     total_atividades = Atividade.objects.count()
     context = {"atividades": atividades, "total_atividades": total_atividades}
     return render(request, "gestor/atividades.html", context)
+
+
+# ---------------------------------------------------------------------------- #
+#                               RELATORIOS (PDF)                               #
+# ---------------------------------------------------------------------------- #
+
+
+# ------------------------------ Relatorio Aluno ----------------------------- #
+class RelatorioAluno(LoginRequiredMixin, TemplateView):  # WeasyTemplateView
+    template_name = "gestor/relatorio_aluno.html"
+    pdf_filename = "relatorio_aluno.pdf"
+    permission_required = "gestor.view_aluno"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["report_date"] = timezone.now().date()
+        context["body_text"] = (
+            "This is the body of the report. Replace with real content."
+        )
+        return context
+
+
+# ---------------------------- Relatorio Atividade --------------------------- #
+class RelatorioAtividade(LoginRequiredMixin, TemplateView):
+    template_name = "gestor/relatorio_atividade.html"
+    pdf_filename = "relatorio_atividade.pdf"
+    permission_required = "gestor.view_atividade"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["report_date"] = timezone.now().date()
+        context["body_text"] = (
+            "This is the body of the report. Replace with real content."
+        )
+        return context

@@ -18,4 +18,10 @@ urlpatterns = [
     path("aluno/<str:aluno_ra>/", views.aluno, name="aluno"),
     path("atividade/<str:atividade_nome>/", views.atividade, name="atividade"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("relatorio_aluno/", views.RelatorioAluno.as_view(), name="relatorio_aluno"),
+    path(
+        "relatorio_atividade/",
+        views.RelatorioAtividade.as_view(),
+        name="relatorio_atividade",
+    ),
 ]
