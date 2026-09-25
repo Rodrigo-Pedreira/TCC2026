@@ -3,15 +3,26 @@
 {% block title %} {{ aluno.nome }} {% endblock %}
 
 {% block content %}
-<h1>Aluno</h1>
+<div style="max-width: 25rem;">
+  <div class="card">
+    <h2 class="card-header">Aluno</h2>
 
-<ul class="list-group list-group-horizontal">
-  <li class="list-group-item">{{ aluno.ra }}</li>
-  <li class="list-group-item">{{ aluno.nome }}</li>
-  {% for atividade in aluno_atividades %}
-  <li class="list-group-item">
-    <a href="{% url 'gestor:atividade' atividade %}">{{ atividade }}</a>
-  </li>
-  {% endfor %}
-</ul>
+    <div class="card-body">
+      <h5 class="card-title">{{ aluno.nome }}</h5>
+      <p class="card-text">{{ aluno.ra }}</p>
+
+      <div class="mb-3">
+        <a class="btn btn-outline-info" href="{% url 'gestor:relatorio_aluno' %}" role="button">Gerar Relatório</a>
+      </div>
+
+      <ul>
+        {% for atividade in aluno_atividades %}
+        <li>
+          <a href="{% url 'gestor:atividade' atividade %}">{{ atividade }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 {% endblock %}

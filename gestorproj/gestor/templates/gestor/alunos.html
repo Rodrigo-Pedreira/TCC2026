@@ -3,32 +3,46 @@
 {% block title %}Alunos{% endblock %}
 
 {% block content %}
-<h2 class="m-3">Alunos <span class="badge text-bg-primary rounded-pill">{{ total_alunos }}</span></h2>
-<div class="col-md-2 m-3">
-  <input type="text" id="search-input" class="form-control" placeholder="Buscar por nome ou RA...">
+<div style="max-width: 25rem;">
+  <div class="card">
+    <h2 class="card-header">
+      Alunos
+      <span class="badge text-bg-primary rounded-pill">{{ total_alunos }}</span>
+    </h2>
+
+    <div class="card-body">
+
+      <div class="w-75">
+        <input type="text" id="search-input" class="form-control" placeholder="Buscar por nome ou RA...">
+      </div>
+
+      <table id="alunos-table" class="table table-striped table-hover w-auto m-3"
+        style="--bs-table-hover-bg: rgba(13, 110, 253, 0.15);">
+        <thead>
+          <tr>
+            <th>RA</th>
+            <th>Nome</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+          {% for aluno in alunos %}
+          <tr>
+            <td class="position-relative"><a class="stretched-link"
+                href="{% url 'gestor:aluno' aluno.ra %}">{{aluno.ra}}</a>
+            </td>
+            <td class="position-relative">{{ aluno.nome }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="2">Nenhum aluno encontrado.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-<table id="alunos-table" class="table table-striped table-hover w-auto m-3"
-  style="--bs-table-hover-bg: rgba(13, 110, 253, 0.15);">
-  <thead>
-    <tr>
-      <th>RA</th>
-      <th>Nome</th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-    {% for aluno in alunos %}
-    <tr>
-      <td class="position-relative"><a class="stretched-link" href="{% url 'gestor:aluno' aluno.ra %}">{{ aluno.ra}}</a>
-      </td>
-      <td class="position-relative">{{ aluno.nome }}</td>
-    </tr>
-    {% empty %}
-    <tr>
-      <td colspan="2">Nenhum aluno encontrado.</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
 {% endblock %}
 
 {% block extra_js %}
